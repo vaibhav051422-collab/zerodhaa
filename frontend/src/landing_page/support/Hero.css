@@ -1,0 +1,88 @@
+.support-hero {
+  background-color: #f8f9fa;
+  padding-bottom: 3rem;
+}
+
+/* Top bar */
+.support-wrapper {
+  background-color: #387ed1; /* Zerodha blue */
+  color: white;
+  padding: 1.5rem 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.support-wrapper h4 {
+  margin: 0;
+  font-weight: 500;
+}
+
+.support-wrapper a {
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+/* Main content */
+.support-content {
+  padding: 3rem;
+}
+
+.support-left h1,
+.support-right h1 {
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+}
+
+/* Search box */
+.support-search {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 1.5rem;
+  font-size: 14px;
+}
+
+.support-search:focus {
+  outline: none;
+  border-color: #387ed1;
+}
+
+/* Links under search */
+.support-links {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.support-links a {
+  color: #387ed1;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.support-links a:hover {
+  text-decoration: underline;
+}
+
+/* Featured section */
+.support-right ol {
+  padding-left: 18px;
+}
+
+.support-right li {
+  margin-bottom: 10px;
+}
+
+.support-right a {
+  color: #387ed1;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.support-right a:hover {
+  text-decoration: underline;
+}
