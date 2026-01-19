@@ -10,6 +10,7 @@ const app = express();
 const { HoldingsModel } = require("./model/HoldingsModel");
 const { PositionsModel } = require("./model/PositionsModel"); 
 const { OrdersModel } = require("./model/OrdersModel");
+const {UsersModel}=require("./model/UsersModel");
 
 // Middleware
 app.use(express.json());
@@ -150,6 +151,24 @@ app.get("/addHoldings", async (req, res) => {
   });
   res.send("Done!");
 });
+app.get('/addUser',async(req,res)=>{
+  let tempUsers=[
+    { 
+      
+  "username": "vibhu_dev",
+  "email": "vibhu.dev@example.com",
+  "password": "Test@1234",
+  
+
+
+
+
+
+    },
+  ];
+   await UsersModel.insertMany(tempUsers);
+  res.send("Users added successfully");
+});
 
 // app.get("/addPositions", async (req, res) => {
 //   let tempPositions = [
@@ -234,6 +253,12 @@ app.post('/neworder',async(req,res)=>{
     res.send("order saved");
 
 });
+app.get("/allUsers",async(req,res)=>{
+  let allUsers=await UsersModel.find({});
+  res.json(allUsers);
+
+});
+
 
   
 
