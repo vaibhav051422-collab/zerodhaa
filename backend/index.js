@@ -3,6 +3,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser=require('body-parser');
 const cors = require("cors");
+const authRoutes = require("./routes/authRoutes.js");
 
 const app = express();
 
@@ -256,8 +257,11 @@ app.post('/neworder',async(req,res)=>{
 app.get("/allUsers",async(req,res)=>{
   let allUsers=await UsersModel.find({});
   res.json(allUsers);
+  
 
 });
+app.use("/api/auth", authRoutes);
+
 
 
   
@@ -278,3 +282,4 @@ const start = async () => {
 };
 
 start();
+

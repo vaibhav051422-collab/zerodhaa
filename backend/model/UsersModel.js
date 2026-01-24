@@ -3,5 +3,5 @@ const { UserSchema } = require("../schemas/UsersSchema");
 
 const UsersModel = mongoose.model("user", UserSchema);
 
-module.exports = { UsersModel };
+module.exports =  UsersModel ;
 

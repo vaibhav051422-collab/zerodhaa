@@ -25,6 +25,7 @@ root.render(
       <Route path="/product" element={<ProductPage />} />
       <Route path="/pricing" element={<PricingPage />} />
       <Route path="/support" element={<SupportPage />} />
+      
   
     </Routes>
     <Footer />

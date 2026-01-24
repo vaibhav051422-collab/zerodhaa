@@ -1,85 +1,83 @@
-import React, { useState } from 'react';
-import './SignUp.css'; // optional for custom styling
+import { useState } from "react";
+import axios from "axios";
+import "./SignUp.css"; // Ensure you import the CSS file
 
-function SignUp() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
-  });
+const Signup = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = (e) => {
+  const handleSignup = async (e) => {
     e.preventDefault();
-    if (formData.password !== formData.confirmPassword) {
-      alert("Passwords do not match!");
-      return;
+    setError("");
+    setLoading(true);
+
+    try {
+      const res = await axios.post("http://localhost:8000/api/auth/signup", {
+        name,
+        email,
+        password,
+      });
+
+      localStorage.setItem("token", res.data.token);
+      alert("Signup successful");
+     // console.log(res.data);
+      window.location.href = "/login";
+    } catch (err) {
+      setError(err.response?.data?.message || "Signup failed");
+    } finally {
+      setLoading(false);
     }
-    // You can send formData to your backend API here
-    console.log("User Registered:", formData);
-    alert("Sign Up Successful!");
   };
 
   return (
     <div className="signup-container">
-      <h2>Sign Up</h2>
-      <form onSubmit={handleSubmit} className="signup-form">
+      <form onSubmit={handleSignup} className="signup-form">
+        <h2>Signup</h2>
+
+        {error && <p className="error-message">{error}</p>}
+
         <div className="form-group">
-          <label>Name:</label>
+          <label>Name</label>
           <input
             type="text"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            required
             placeholder="Enter your name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
           />
         </div>
 
         <div className="form-group">
-          <label>Email:</label>
+          <label>Email</label>
           <input
             type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
             placeholder="Enter your email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
           />
         </div>
 
         <div className="form-group">
-          <label>Password:</label>
+          <label>Password</label>
           <input
             type="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            required
             placeholder="Enter your password"
-          />
-        </div>
-
-        <div className="form-group">
-          <label>Confirm Password:</label>
-          <input
-            type="password"
-            name="confirmPassword"
-            value={formData.confirmPassword}
-            onChange={handleChange}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             required
-            placeholder="Confirm your password"
           />
         </div>
 
-        <button type="submit">Sign Up</button>
+        <button type="submit" disabled={loading}>
+          {loading ? "Signing up..." : "Signup"}
+        </button>
       </form>
     </div>
   );
-}
+};
 
-export default SignUp;
+export default Signup;
